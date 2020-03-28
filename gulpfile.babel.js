@@ -4,12 +4,12 @@ import browserSync from 'browser-sync'
 import sass from 'gulp-sass'
 import cleanCSS from 'gulp-clean-css'
 import autoPrefixer from 'gulp-autoprefixer'
-import rename from 'gulp-rename'
 import count from 'gulp-count'
 import plumber from 'gulp-plumber'
 import newer from 'gulp-newer'
 import imageMin from 'gulp-imagemin'
 import htmlBeautify from 'gulp-html-beautify'
+import concat from 'gulp-concat'
 
 const paths = {
   root: {
@@ -40,8 +40,6 @@ const paths = {
 }
 
 const css = () => {
-  const cbString = new Date().getTime()
-
   return gulp
     .src(paths.styles.file)
     .pipe(
@@ -57,16 +55,15 @@ const css = () => {
         outputStyle: 'expanded',
       }).on('error', sass.logError),
     )
-    .pipe(cleanCSS())
+    .pipe(gulp.dest(paths.styles.dist))
+    .pipe(concat('all.min.css'))
     .pipe(
       autoPrefixer({
         overrideBrowserslist: ['last 3 versions'],
         cascade: false,
       }),
     )
-    .pipe(gulp.dest(paths.styles.dist))
     .pipe(cleanCSS())
-    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(paths.styles.dist))
     .pipe(count('<%= counter %> css files'))
 }
