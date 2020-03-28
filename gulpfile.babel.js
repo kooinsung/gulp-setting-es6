@@ -10,6 +10,7 @@ import newer from 'gulp-newer'
 import imageMin from 'gulp-imagemin'
 import htmlBeautify from 'gulp-html-beautify'
 import concat from 'gulp-concat'
+import distClean from 'gulp-dest-clean'
 
 const paths = {
   root: {
@@ -89,6 +90,7 @@ const script = () => {
       //     comments: /^!/
       //   }
       // }))
+      .pipe(distClean(paths.scripts.dist))
       .pipe(newer(paths.scripts.dist))
       .pipe(gulp.dest(paths.scripts.dist))
       .pipe(count('<%= counter %> js files'))
@@ -106,6 +108,7 @@ const image = () => {
         },
       }),
     )
+    .pipe(distClean(paths.images.dist))
     .pipe(newer(paths.images.dist))
     .pipe(imageMin())
     .pipe(gulp.dest(paths.images.dist))
@@ -123,6 +126,8 @@ const html = () => {
         },
       }),
     )
+    .pipe(distClean(paths.html.dist))
+    .pipe(newer(paths.html.dist))
     .pipe(fileInclude())
     .pipe(
       htmlBeautify({
