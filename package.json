@@ -1,18 +1,10 @@
 {
-  "name": "gulp-setting-es6",
+  "name": "homespick",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:html": "gulp build:html",
-    "build:css": "gulp build:css",
-    "build:js": "gulp build:js",
-    "build:img": "gulp build:img",
-    "eslint": "gulp eslint",
-    "copy": "gulp copy",
-    "build": "gulp build",
-    "clean": "rimraf ./public",
-    "dev": "yarn clean && gulp build && gulp watch"
+    "dev": "gulp"
   },
   "author": "",
   "license": "ISC",
@@ -27,8 +19,8 @@
     "gulp-concat": "^2.6.1",
     "gulp-count": "^1.0.0",
     "gulp-dest-clean": "^0.5.0",
-    "gulp-file-include": "^2.1.1",
     "gulp-html-beautify": "^1.0.1",
+    "gulp-html-tag-include": "^1.0.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-newer": "^1.4.0",
     "gulp-plumber": "^1.2.1",

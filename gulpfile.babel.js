@@ -1,5 +1,5 @@
 import gulp from 'gulp'
-import fileInclude from 'gulp-file-include'
+import fileInclude from 'gulp-html-tag-include'
 import browserSync from 'browser-sync'
 import sass from 'gulp-sass'
 import cleanCSS from 'gulp-clean-css'
