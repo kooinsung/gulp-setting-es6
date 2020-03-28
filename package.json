@@ -1,0 +1,40 @@
+{
+  "name": "gulp-setting-es6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:html": "gulp build:html",
+    "build:css": "gulp build:css",
+    "build:js": "gulp build:js",
+    "build:img": "gulp build:img",
+    "eslint": "gulp eslint",
+    "copy": "gulp copy",
+    "build": "gulp build",
+    "clean": "rimraf ./public",
+    "dev": "yarn clean && gulp build && gulp watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-count": "^1.0.0",
+    "gulp-file-include": "^2.1.1",
+    "gulp-html-beautify": "^1.0.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2",
+    "prettier": "^2.0.2"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
