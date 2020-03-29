@@ -127,7 +127,7 @@ const html = () => {
       }),
     )
     .pipe(distClean(paths.html.dist))
-    .pipe(newer(paths.html.dist))
+    // .pipe(newer(paths.html.dist))
     .pipe(fileInclude())
     .pipe(
       htmlBeautify({
