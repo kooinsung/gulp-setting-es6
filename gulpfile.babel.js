@@ -11,6 +11,8 @@ import imageMin from 'gulp-imagemin'
 import htmlBeautify from 'gulp-html-beautify'
 import concat from 'gulp-concat'
 import distClean from 'gulp-dest-clean'
+import replace from 'gulp-replace'
+import cachebust from 'gulp-cache-bust'
 
 const paths = {
   root: {
@@ -116,26 +118,32 @@ const image = () => {
 }
 
 const html = () => {
-  return gulp
-    .src(paths.html.file)
-    .pipe(
-      plumber({
-        errorHandler: function (err) {
-          console.log(err.messageFormatted)
-          this.emit('end')
-        },
-      }),
-    )
-    .pipe(distClean(paths.html.dist))
-    // .pipe(newer(paths.html.dist))
-    .pipe(fileInclude())
-    .pipe(
-      htmlBeautify({
-        indent_size: 2,
-      }),
-    )
-    .pipe(gulp.dest(paths.html.dist))
-    .pipe(count('<%= counter %> html files'))
+  return (
+    gulp
+      .src(paths.html.file)
+      .pipe(
+        plumber({
+          errorHandler: function (err) {
+            console.log(err.messageFormatted)
+            this.emit('end')
+          },
+        }),
+      )
+      .pipe(distClean(paths.html.dist))
+      // .pipe(newer(paths.html.dist))
+      .pipe(fileInclude())
+      .pipe(
+        htmlBeautify({
+          indent_size: 2,
+        }),
+      )
+      .pipe(replace(/^\s*\r?\n/gm, ''))
+      .pipe(cachebust({
+        type: 'timestamp'
+      }))
+      .pipe(gulp.dest(paths.html.dist))
+      .pipe(count('<%= counter %> html files'))
+  )
 }
 
 // -- build server task
@@ -144,7 +152,7 @@ const server = (done) => {
     port: 3333,
     server: {
       baseDir: paths.root.dist + '/',
-      index: './html/index.html',
+      index: './html/page1.html',
     },
   })
   done()
@@ -160,7 +168,7 @@ const watch = (done) => {
   gulp.watch([paths.html.file, paths.html.include], gulp.parallel(html, reload))
   gulp.watch([paths.styles.file], gulp.parallel(css, reload))
   gulp.watch([paths.scripts.file], gulp.parallel(script, reload))
-  gulp.watch([paths.scripts.file], gulp.parallel(image, reload))
+  gulp.watch([paths.images.file], gulp.parallel(image, reload))
   done()
 }
 
